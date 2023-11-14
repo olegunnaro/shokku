@@ -13,7 +13,7 @@ COPY internal ./internal
 COPY --from=npm_builder /app/ui/dist ./cmd/shokku/dist
 RUN go get -d -v ./...
 RUN go install -v ./...
-RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o /go/bin/shokku ./cmd/shokku
+RUN GOOS=linux GOARCH=arm64 go build -ldflags="-w -s" -o /go/bin/shokku ./cmd/shokku
 
 FROM gcr.io/distroless/static:nonroot
 COPY --from=go_builder /go/bin/shokku /go/bin/shokku
